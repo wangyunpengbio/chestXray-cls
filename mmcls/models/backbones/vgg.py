@@ -104,7 +104,7 @@ class VGG(BaseBackbone):
         with_norm = norm_cfg is not None
 
         if out_indices is None:
-            out_indices = (5, ) if num_classes > 0 else (4, )
+            out_indices = (5,) if num_classes > 0 else (4,)
         assert max(out_indices) <= num_stages
         self.out_indices = out_indices
 
@@ -116,7 +116,7 @@ class VGG(BaseBackbone):
             num_modules = num_blocks + 1
             end_idx = start_idx + num_modules
             dilation = dilations[i]
-            out_channels = 64 * 2**i if i < 4 else 512
+            out_channels = 64 * 2 ** i if i < 4 else 512
             vgg_layer = make_vgg_layer(
                 self.in_channels,
                 out_channels,
@@ -139,8 +139,8 @@ class VGG(BaseBackbone):
 
         if self.num_classes > 0:
             self.classifier = nn.Sequential(
-                # nn.Linear(512 * 7 * 7, 4096), # FIXME 原来224使用的尺度
-                nn.Linear(131072, 4096),
+                nn.Linear(512 * 7 * 7, 4096),  # 原来图像输入224对应的网络
+                # nn.Linear(131072, 4096), # 图像输入512对应的网络
                 nn.ReLU(True),
                 nn.Dropout(),
                 nn.Linear(4096, 4096),
