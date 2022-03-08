@@ -4,7 +4,7 @@ model = dict(
     type='ImageClassifier',
     backbone=dict(
         type='VisionTransformer',
-        arch='b',
+        arch='l',
         img_size=224,
         patch_size=16,
         drop_rate=0.1,
@@ -19,13 +19,13 @@ model = dict(
     head=dict(
         type='MultiLabelVisionTransformerClsHead',
         num_classes=14,
-        in_channels=768,
+        in_channels=1024,
         loss=dict(type='CrossEntropyLoss', use_sigmoid=True, loss_weight=1.0)
     )
 )
 
 # load model pretrained on imagenet
-load_from = 'https://download.openmmlab.com/mmclassification/v0/vit/pretrain/vit-base-p16_3rdparty_pt-64xb64_in1k-224_20210928-02284250.pth'  # vit 16 pretrain on 224
+load_from = 'https://download.openmmlab.com/mmclassification/v0/vit/pretrain/vit-large-p16_3rdparty_pt-64xb64_in1k-224_20210928-0001f9a1.pth'  # vit 16 pretrain on 224
 
 # optimizer
 optimizer = dict(

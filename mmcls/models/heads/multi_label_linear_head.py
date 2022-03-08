@@ -30,12 +30,12 @@ class MultiLabelLinearClsHead(MultiLabelClsHead):
         super(MultiLabelLinearClsHead, self).__init__(
             loss=loss, init_cfg=init_cfg)
 
-        if num_classes <= 0:
-            raise ValueError(
-                f'num_classes={num_classes} must be a positive integer')
-
         self.in_channels = in_channels
         self.num_classes = num_classes
+
+        if self.num_classes <= 0:
+            raise ValueError(
+                f'num_classes={num_classes} must be a positive integer')
 
         self.fc = nn.Linear(self.in_channels, self.num_classes)
 

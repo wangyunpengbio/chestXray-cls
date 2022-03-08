@@ -40,6 +40,12 @@ class LinearClsHead(ClsHead):
             x = x[-1]
         return x
 
+    def forward_train(self, x, gt_label, **kwargs):
+        x = self.pre_logits(x)
+        cls_score = self.fc(x)
+        losses = self.loss(cls_score, gt_label, **kwargs)
+        return losses
+
     def simple_test(self, x, softmax=True, post_process=True):
         """Inference without augmentation.
 
@@ -74,8 +80,3 @@ class LinearClsHead(ClsHead):
         else:
             return pred
 
-    def forward_train(self, x, gt_label, **kwargs):
-        x = self.pre_logits(x)
-        cls_score = self.fc(x)
-        losses = self.loss(cls_score, gt_label, **kwargs)
-        return losses

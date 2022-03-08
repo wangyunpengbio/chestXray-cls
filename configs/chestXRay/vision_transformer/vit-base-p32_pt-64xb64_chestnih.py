@@ -6,7 +6,7 @@ model = dict(
         type='VisionTransformer',
         arch='b',
         img_size=224,
-        patch_size=16,
+        patch_size=32,
         drop_rate=0.1,
         init_cfg=[
             dict(
@@ -25,7 +25,7 @@ model = dict(
 )
 
 # load model pretrained on imagenet
-load_from = 'https://download.openmmlab.com/mmclassification/v0/vit/pretrain/vit-base-p16_3rdparty_pt-64xb64_in1k-224_20210928-02284250.pth'  # vit 16 pretrain on 224
+load_from = 'https://download.openmmlab.com/mmclassification/v0/vit/pretrain/vit-base-p32_3rdparty_pt-64xb64_in1k-224_20210928-eee25dd4.pth'  # vit 16 pretrain on 224
 
 # optimizer
 optimizer = dict(
